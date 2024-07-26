@@ -110,7 +110,8 @@
                                         @endforeach
                                     </x-select>
                                 </div>
-
+                                
+                                
                                 <div>
                                     <x-label>
                                         Etiquetas

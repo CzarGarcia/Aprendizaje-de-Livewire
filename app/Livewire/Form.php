@@ -34,14 +34,28 @@ class Form extends Component
     //? CICLO DE VIDA DE LOS COMPONENTES DE LIVEWIRE
     public function mount(){
 
+            //para 2 invesrigar
+        //Para la carga lenta de los componentes se tiene  
         $this->categories = Category::all();
         $this->tags = Tag::all();
         $this->posts = Post::all();
-    }
 
-    public function updating($property, $value){
-        dd($property);
     }
+    //! Updating sirve para realizar acciones antes de que se actualice el valor de una propiedad.
+    // public function updating($property, $value){
+    //     dd($property);
+    // }
+
+
+    // //! La función hydrate se ejecuta antes de renderizar la vista, se utiliza para realizar acciones antes de renderizar la vista.
+    // public function hydrate(){
+
+    // }
+
+    // //! La función dehydrate se ejecuta después de renderizar la vista, se utiliza para realizar acciones después de renderizar la vista.
+    // public function deshydrate(){
+
+    // }
     
     public function save(){
         $this->postCreate->save();
@@ -69,6 +83,17 @@ class Form extends Component
         $this->postEdit->update();
         $this->posts = Post::all();
         $this->postEdit->open = false;
+    }
+
+
+    //? Este metodo es para que antes de mostrar la vista, ca
+    public function placeholder()
+    {
+        return <<<'HTML'
+            <div class="flex justify-center items-center min-h-screen">
+                <h1 class="text-2xl font-bold text-gray-700">Cargando...</h1>
+            </div>
+        HTML;
     }
 
     public function render()

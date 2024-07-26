@@ -1,7 +1,11 @@
 
 <div>
 
-        <x-button wire:click="$event.AddUserName">
-            Guardar
-        </x-button>
+    <p>Componente Hijo.</p>
+
+
+    <x-input wire:model.live="name"/>
+
+    <p>{{$name}}</p>
+      
 </div>

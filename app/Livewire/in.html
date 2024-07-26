@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpine</title>
+    <script  src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+    <style>
+        .hidden{
+            display: none;
+        }
+        .m{
+            
+            background: #f1f1f1;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 x-data="{ message: 'I ❤️ Alpine' }" x-text="message"></h1>
+
+    <!-- Para definir una variable en Alpine se usa la directiva x-data="{}" --> 
+    <div class="m" x-data="data()" x-init="open = false"  @click.away="close()"> 
+        <!-- Eventos -->
+        <!-- para los eventos -->
+        <button :disabled="open" @click="isOpen()">
+            Menu
+        </button>
+        <!-- El away es para cuando se de click por fuera -->
+        <nav class="hidden" :class="{'hidden': !open}">
+            <ul>
+                <li>
+                    Item 1
+                </li>
+                <li>
+                    Item 2
+                </li>
+                <li>
+                    Item 3
+                </li>
+            </ul>
+
+            <div >
+                <ul x-on:click.away="count = 0">
+                    <li><button x-on:click="suma(1)">1</button></li>
+                    <li><button x-on:click="suma(2)">2</button></li>
+                    <li><button x-on:click="suma(3)">3</button></li>
+                </ul>
+                <p x-text="count"></p>
+
+            </div>
+
+        </nav>
+    </div>
+   
+
+    <div x-data="data()" >
+        <button @click="message = !message">Mensaje</button>
+        <div x-show="message">
+
+            <input type="text" x-model="mensaje" >
+            <!--El x-ref sirve para  -->
+            <button @click="$refs.msj.innerText = mensaje">Enviar</button>
+            <h1 x-ref="msj"><h1/>
+                
+            </div>
+    </div>
+    
+    <div x-data="data()">
+        <button @click ="list = !list">Lista</button>
+        <!-- Para el uso del If se necestita -->
+         <div x-show="list">
+             <ul >
+                 <template x-for="product in Object.values(products)">
+                     <li><span x-text="product.name"></span>
+                        <template x-if="product.stock == 0 ">
+                            <span> No hay stock</span>
+                            
+                        </template>
+                    </li>
+                </template>
+            </ul>
+        </div>
+    </div>
+
+    <div x-data="data()">
+
+        <form action="" @submit="alert(mensajeForm)" >
+            <input type="text" x-model="mensajeForm" @keydown.ctrl="alert('has presionado el Control')">
+
+            <button >Hola</button>
+        </form>
+    </div>
+
+</body>
+<script>
+    function data() {
+        return {
+            open: null,
+            count: 0,
+            mensaje:null,
+            mensajeForm:null,
+            list: false,
+            message: false,
+            products: {
+                1:{
+                 id: 1,
+                 name: 'Producto 1',
+                 stock: 0   
+                },
+                2:{
+                 id: 1,
+                 name: 'Producto 2',
+                 stock: 8   
+                },
+                3: {
+                 id: 1,
+                 name: 'Producto 3',
+                 stock: 1   
+                },
+                4: {
+                 id: 1,
+                 name: 'Producto 4',
+                 stock: 0   
+                },
+            },
+            start(){
+                this.open = false;
+            
+            },
+            isOpen() {
+                this.open = !this.open;
+
+            },
+            suma(num) {
+                this.count = this.count + num;
+            },
+            close(){
+                this.open = false;
+            }
+        }
+    }
+</script>
+</html>

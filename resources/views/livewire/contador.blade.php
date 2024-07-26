@@ -1,15 +1,11 @@
 <div>
 
-    <x-button wire:click="decrement">
-        -
-    </x-button>
+   <h1>Contador: {{ $count }}</h1>
     
-    <span class="mx-11">
-        {{$count}}
-    </span>
+    <button wire:click="increment(1)">Incrementar</button>
+    <button wire:click="decrement">Decrementar</button>
+    <button wire:click="resetCount">Resetear</button>
 
-    <x-button wire:click="increment(4)">
-        +
-    </x-button>
-
+    <!-- Muestra el número de veces que se ha actualizado $count -->
+    <div>Actualizaciones del contador: {{ $numero }}</div>
 </div>
